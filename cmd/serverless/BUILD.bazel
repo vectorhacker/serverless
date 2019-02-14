@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["main.go"],
+    importpath = "github.com/vectorhacker/serverless/cmd/serverless",
+    visibility = ["//visibility:private"],
+    deps = ["//third_party/Azure/azure-functions-language-worker-protobuf/src/proto:go_default_library"],
+)
+
+go_binary(
+    name = "serverless",
+    embed = [":go_default_library"],
+    visibility = ["//visibility:public"],
+)
